@@ -1,3 +1,4 @@
+CarouselView/CarouselView.FormsPlugin.Abstractions.Portable/obj
 CarouselView/CarouselView.FormsPlugin.Abstractions/bin
 CarouselView/CarouselView.FormsPlugin.Abstractions/obj
 CarouselView/CarouselView.FormsPlugin.Android/bin
@@ -16,3 +17,5 @@ UWP/bin
 UWP/obj
 packages
 *.userprefs
+*.user
+.vs
