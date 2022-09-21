@@ -414,6 +414,11 @@ namespace CarouselView.FormsPlugin.UWP
                 DoInfiniteScrolling();
                 doWhenArrowsTapped = false;
             }
+
+            if(!settingCurrentPage)
+            {
+                Element.Position = selectedIndex;
+            }
         }
 
         double lastOffset;
@@ -1157,18 +1162,28 @@ namespace CarouselView.FormsPlugin.UWP
             }
         }
 
+        bool settingCurrentPage;
+
         void SetCurrentPage(int position)
         {
-            if (position < 0 || position > Element.ItemsSource?.GetCount() - 1 && !Element.InfiniteScrolling) return;
-
-            if (Element == null || flipView == null || Element?.ItemsSource == null) return;
-
-            if (Element.ItemsSource?.GetCount() > 0)
+            settingCurrentPage = true;
+            try
             {
-                flipView.SelectedItem = Source[position];
-                UpdateIndicatorsTint();
-                SetArrowsVisibility();
-                SendPositionSelected();
+                if (position < 0 || position > Element.ItemsSource?.GetCount() - 1 && !Element.InfiniteScrolling) return;
+
+                if (Element == null || flipView == null || Element?.ItemsSource == null) return;
+
+                if (Element.ItemsSource?.GetCount() > 0)
+                {
+                    flipView.SelectedItem = Source[position];
+                    UpdateIndicatorsTint();
+                    SetArrowsVisibility();
+                    SendPositionSelected();
+                }
+            }
+            finally
+            {
+                settingCurrentPage = false;
             }
         }
 
